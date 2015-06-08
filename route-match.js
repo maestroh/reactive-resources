@@ -1,5 +1,6 @@
 module.exports.match = function(route, path){
   var paramRegex = /([:])(\w+)/g;
+  var resources = /([?:])(\w+)/g;
   var valueRegex = '([^/]*)';
 
   var names = route.match(paramRegex).map(function(s){return s.substring(1, s.length)});
