@@ -36,11 +36,21 @@
 
 var str =  '/song/:id/track/:trackId';
 var regex = /(?:\/)(\w+)/g;
-var matches, output = [];
+var matches, resources = [];
 while (matches = regex.exec(str)){
-    output.push(matches[1]);
+    resources.push(matches[1]);
 }
 
-console.log(JSON.stringify(output));
-
+console.log(JSON.stringify(resources));
 // returns [songs, tracks]
+
+var routeMatch = require('./route-match');
+var data = routeMatch.match('/song/:id/track/:trackId', '/song/0/track/1');
+console.log(JSON.stringify(data));
+// returns [["id","0"],["trackId","1"]]
+
+var newArray = [];
+newArray.push(resources)
+var combined = newArray.concat(data);
+console.log(JSON.stringify(combined));
+// returns [[songs, tracks],["id","0"],["trackId","1"]]
