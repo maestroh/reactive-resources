@@ -1,12 +1,36 @@
-var resources = require('./resources.js');
+var route = require('route-match');
 
-
-
-
-var state = {};
-
-var set = function(path){
-	
+var data = {
+	song:[
+	{
+		id:0,
+		track:[{
+			id:0,
+			type:'Piano'
+		}]	
+	}]
 }
 
-var stateResource = resources.resource(set, get, del, routes);
+var getTrack = function(songId, trackId){
+	return data
+	.song.filter(function(s){return s.id === songId;})[0]
+	.track.filter(function(t) {return t.id === trackId;})[0];
+}
+
+
+var remoteResource = function(){
+	var routes = [{'/song/0/track/0':getTrack}];
+
+
+	return {
+		set: function(path){
+			
+		},
+		get: function(path){
+			
+		},
+		delete: function(path){
+			
+		}
+	}
+}
