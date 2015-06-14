@@ -30617,7 +30617,7 @@ var routeMatch = require('./route-match');
 
 var subject = new Rx.ReplaySubject(1);
 
-var counter = 0;
+var counter = 10;
 
 function add(count){
   counter = counter + count;
@@ -30625,6 +30625,8 @@ function add(count){
 
 var routes = [];
 routes.push({route:'/counter/', handler:add});
+
+subject.onNext({path:'/counter/', count:counter});
 
 Intent.subject.subscribe(function (payload) {
   // find matching route
